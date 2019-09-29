@@ -1,0 +1,18 @@
+<section>
+	<h1><%= current_user.name %>さんの投稿</h1>
+
+ <% @posts.each do |t| %>
+		<div>
+		<img src="<%= t.image %>">
+		<p><%= t.artist %></p>
+		<p><%= t.album %></p>
+
+		<p><%= t.track %></p>
+
+		<p><a href="<%= t.sampleurl %>">サンプル</a></p>
+		<p>コメント：<%=CGI.escapeHTML(t.comment) %></p>
+		<p><a href="/delete/<%= t.id%>">削除</a></p>
+		<p><a href="/edit/<%= t.id%>">編集</a></p>
+		</div>
+	<% end %>
+	</section>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>MUSIC-SNS</title>
+
+</head>
+<body>
+<% unless session[:user] %>
+<a href="/">MUSIC SNS!!!</a>
+<a href="/signup">新規登録</a>
+<% else %>
+<a href="/">MUSIC SNS!!!</a>
+<a href="/home"><img src="<%= current_user.img %>" width="40" height="40" ></a>
+<a href="/search">search</a>
+<a href="/signout">logout</a>
+<% end %>
+
+
+<main>
+<%= yield %>
+</main>
+
+</body>
+</html>
