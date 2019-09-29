@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_28_164333) do
+ActiveRecord::Schema.define(version: 2019_09_29_051501) do
+
+  create_table "posts", force: :cascade do |t|
+    t.string "artist"
+    t.string "album"
+    t.string "track"
+    t.string "image"
+    t.string "sampleurl"
+    t.text "comment"
+    t.string "crossroads"
+    t.integer "user_id"
+    t.string "user_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
