@@ -8,9 +8,9 @@
 
 	<h2>検索結果</h2>
     <% if !@musics.empty? %>
-      <div class="center-hrizontal">
+      <div>
         <% @musics.each do |music| %>
-          <div class="post center-vertical">
+          <div>
             <img src="<%= music["artworkUrl100"] %>">
             <p><%= music["artistName"] %></p>
             <p><%= music["collectionName"] %></p>

@@ -4,7 +4,7 @@ require 'sinatra/reloader' if development?
 
 require 'sinatra/activerecord'
 require './models'
-
+require './image_uploader.rb'
 
 enable :sessions
 
@@ -17,6 +17,7 @@ end
 
 
 get '/' do
+  @posts = Post.all.order("created_at desc")
   erb :index
 end
 
@@ -63,4 +64,40 @@ user = User.find_by(name: params[:name])
     session[:user] = user.id
   end
   redirect '/'
+end
+
+post '/new' do
+  Post.create(image: params[:image],artist: params[:artist],album: params[:album],sampleurl: params[:sampleurl],comment: params[:comment],user_id: current_user.id,user_name: current_user.name)
+redirect '/home'
+end
+
+get '/home' do
+   if current_user.nil?
+    @posts = Post.none
+  else
+    @posts = current_user.posts
+  end
+  erb :home
+end
+
+post '/search' do
+@musics = []
+  erb :search
+end
+
+get '/delete/:id' do
+  Post.find(params[:id]).delete
+  redirect '/home'
+end
+
+get '/edit/:id' do
+  @posts = Post.find(params[:id])
+  erb :edit
+end
+
+post '/edit/:id/update' do
+  post =  Post.find(params[:id])
+  post.comment = params[:comment]
+  post.save
+  redirect '/home'
 end
